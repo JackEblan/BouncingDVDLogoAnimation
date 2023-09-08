@@ -1,10 +1,5 @@
 package com.android.bouncingdvd
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,17 +39,7 @@ fun BouncingDVD(
 
     var color by remember { mutableStateOf(Color.Yellow) }
 
-    val animationSpec = infiniteRepeatable<Float>(
-        animation = tween(easing = LinearEasing)
-    )
-
-    val infiniteTransition = rememberInfiniteTransition(label = "infiniteTransition")
-
-    val runValues by infiniteTransition.animateFloat(
-        initialValue = 0f, targetValue = 1f, animationSpec = animationSpec, label = ""
-    )
-
-    LaunchedEffect(key1 = runValues) {
+    LaunchedEffect(key1 = x, key2 = y) {
         x += xSpeed
         y += ySpeed
 
