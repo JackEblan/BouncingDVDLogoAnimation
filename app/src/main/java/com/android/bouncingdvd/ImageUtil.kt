@@ -8,25 +8,25 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 
 class ImageUtil(private val context: Context) {
-    fun resizeImageBitmap(@DrawableRes id: Int, maxWidth: Int, maxHeight: Int): ImageBitmap {
+    fun resizeImageBitmap(@DrawableRes id: Int, width: Float, height: Float): ImageBitmap {
         val image = BitmapFactory.decodeResource(context.resources, id)
-        val sourceWidth: Int = image.width
-        val sourceHeight: Int = image.height
+        val oldWidth = image.width.toFloat()
+        val oldHeight = image.height.toFloat()
 
-        var targetWidth = maxWidth
-        var targetHeight = maxHeight
+        var newWidth = width
+        var newHeight = height
 
-        val sourceRatio = sourceWidth.toFloat() / sourceHeight.toFloat()
-        val targetRatio = maxWidth.toFloat() / maxHeight.toFloat()
+        val oldRatio = oldWidth / oldHeight
+        val newRatio = width / height
 
-        if (targetRatio > sourceRatio) {
-            targetWidth = (maxHeight.toFloat() * sourceRatio).toInt()
+        if (newRatio > oldRatio) {
+            newWidth = (height * oldRatio)
         } else {
-            targetHeight = (maxWidth.toFloat() / sourceRatio).toInt()
+            newHeight = (width / oldRatio)
         }
 
         return Bitmap.createScaledBitmap(
-            image, targetWidth, targetHeight, true
+            image, newWidth.toInt(), newHeight.toInt(), true
         ).asImageBitmap()
     }
 }

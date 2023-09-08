@@ -19,8 +19,4 @@ object AppModule {
     @Provides
     @Singleton
     fun provideImageUtil(@ApplicationContext context: Context): ImageUtil = ImageUtil(context)
-
-    @Provides
-    @Singleton
-    fun provideResourceUtil(): ResourceUtil = ResourceUtil()
 }

@@ -1,6 +1,7 @@
 package com.android.bouncingdvd
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -11,26 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.ImageBitmap
 
 @Composable
 fun BouncingDVD(
-    modifier: Modifier, imageUtil: ImageUtil, resourceUtil: ResourceUtil, randomColor: () -> Color
+    modifier: Modifier,
+    screenWidth: Float,
+    screenHeight: Float,
+    logo: ImageBitmap,
+    logoWidth: Float,
+    logoHeight: Float,
+    randomColor: () -> Color
 ) {
-    val configuration = LocalConfiguration.current
-
-    val screenWidth = resourceUtil.dpToPx(configuration.screenWidthDp.dp.value)
-    val screenHeight = resourceUtil.dpToPx(configuration.screenHeightDp.dp.value)
-    val logoWidth = 200
-    val logoHeight = 200
-
-    val logo = remember {
-        imageUtil.resizeImageBitmap(
-            id = R.drawable.dvd_logo, maxWidth = logoWidth, maxHeight = logoHeight
-        )
-    }
-
     var x by remember { mutableStateOf(0f) }
     var y by remember { mutableStateOf(0f) }
 
@@ -43,12 +36,12 @@ fun BouncingDVD(
         x += xSpeed
         y += ySpeed
 
-        if (x + logoWidth >= screenWidth || x == 0f) {
+        if (x + logoWidth > screenWidth || x == 0f) {
             xSpeed = -xSpeed
             color = randomColor.invoke()
         }
 
-        if (y + logoHeight >= screenHeight || y == 0f) {
+        if (y + logoHeight / 2 > screenHeight || y == 0f) {
             ySpeed = -ySpeed
             color = randomColor.invoke()
         }
