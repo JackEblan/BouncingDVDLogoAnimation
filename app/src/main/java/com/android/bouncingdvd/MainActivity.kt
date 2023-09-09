@@ -13,13 +13,16 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.android.bouncingdvd.ui.theme.BouncingDVDTheme
+import java.util.Random
 
 class MainActivity : ComponentActivity() {
     private val imageUtil by lazy {
         ImageUtil(applicationContext)
     }
 
-    private val colors = listOf(Color.Red, Color.Green, Color.Blue)
+    private val random by lazy {
+        Random()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +51,11 @@ class MainActivity : ComponentActivity() {
                                 logoWidth = logoWidth,
                                 logoHeight = logoHeight,
                                 randomColor = {
-                                    colors.random()
+                                    Color(
+                                        red = random.nextInt(255),
+                                        green = random.nextInt(255),
+                                        blue = random.nextInt(255)
+                                    )
                                 })
                 }
             }
