@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 
 class ImageUtil(private val context: Context) {
+
     fun resizeImageBitmap(@DrawableRes id: Int, width: Float, height: Float): ImageBitmap {
         val image = BitmapFactory.decodeResource(context.resources, id)
         val oldWidth = image.width.toFloat()

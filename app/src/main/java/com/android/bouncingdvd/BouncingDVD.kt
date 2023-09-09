@@ -38,12 +38,12 @@ fun BouncingDVD(
 
         if (x + logoWidth > screenWidth || x == 0f) {
             xSpeed = -xSpeed
-            color = randomColor.invoke()
+            color = randomColor()
         }
 
         if (y + logoHeight / 2 > screenHeight || y == 0f) {
             ySpeed = -ySpeed
-            color = randomColor.invoke()
+            color = randomColor()
         }
     }
 

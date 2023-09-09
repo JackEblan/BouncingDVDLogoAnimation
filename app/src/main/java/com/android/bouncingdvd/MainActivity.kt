@@ -13,17 +13,15 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.android.bouncingdvd.ui.theme.BouncingDVDTheme
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var imageUtil: ImageUtil
-
-    @Inject
-    lateinit var random: Random
+    private val imageUtil by lazy {
+        ImageUtil(applicationContext)
+    }
+    private val random by lazy {
+        Random()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
