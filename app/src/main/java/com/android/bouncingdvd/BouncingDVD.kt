@@ -30,7 +30,7 @@ fun BouncingDVD(
     var xSpeed by remember { mutableStateOf(5f) }
     var ySpeed by remember { mutableStateOf(5f) }
 
-    var color by remember { mutableStateOf(Color.Yellow) }
+    var color by remember { mutableStateOf(randomColor()) }
 
     LaunchedEffect(key1 = x, key2 = y) {
         x += xSpeed
